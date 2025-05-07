@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Hit It Right</title><script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script><script src="https://cdn.applixir.com/applixir.app.v5.0.1.js"></script><link rel="stylesheet" href="./style.css"/><img id="rotate-screen" src="assets/images/rotate_screen_landscape.png" style="display: none;"> <img id="splash_bg" src="assets/images/splash/splash_bg.png" style="display: none;"> <img id="logo" src="assets/images/splash/logo.png" style="display: none;"> <img id="progress_base" src="assets/images/splash/progress_base.png" style="display: none;"> <img id="progress_bar" src="assets/images/splash/progress_bar.png" style="display: none;"><script src="lib/phaser.min.js"></script><script src="lib/fontfaceobserver.standalone.js"></script><script defer="defer" src="bundle.js"></script></head><body><div id="applixir-ad-container"></div><button id="start">Watch Ad</button><script>const options = {
+            gameId: 9443,
+            zoneId: 2050,
+            accountId: 8837,
+            injectionElementId: "applixir-ad-container", // This is the ID of the div from step 1.
+            adStatusCallbackFn: (status) => {
+                console.log("OUTSIDE Ad status: ", status);
+                if (status === "adCompleted") {
+                    // Grant reward
+                    console.log("Reward the user!");
+                }
+            },
+            adErrorCallbackFn: (error) => { // This is how you can listen for errors
+                console.log("Error: ", error.getError().toString());
+            },
+        };
+        var application = new Application(options);
+
+        console.log("application: ", application);
+        application.initialize();
+
+
+        const startBtn = document.getElementById("start");
+        if (startBtn) {
+            startBtn.addEventListener("click", () => {
+                console.log("showAd application: ", application);
+                console.log("options: ", options);
+                application.openPlayer();
+            });
+        } else {
+            console.error("No #start button found in DOM.");
+        }
+
+
+        // window.onload = () => {
+        //     console.log("onload");
+
+        //     application.initialize();
+        //     document.getElementById("start").addEventListener("click", () => {
+        //         console.log("showAd application: ", application);
+        //         console.log("options: ", options);
+        //         application.openPlayer();
+        //     });
+        // };
+
+        // function showAd() {
+        //     console.log("showAd application: ", application);
+        //     console.log("options: ", options);
+
+        //     application.openPlayer(options);
+        // }</script></body></html>
